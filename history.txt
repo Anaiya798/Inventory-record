@@ -1,0 +1,43 @@
+add: 1, pen, 2, 25, 
+view_goods 
+delete: pen, 2,
+view_goods 
+add: 1, pen, 2, 20, 
+view_history 
+add: 1, pencil, 1, 35, 
+view_history 
+add: 2, pillow, 2, 10, 
+add: 1, pen, 1, 15, 
+add: 1, pen, 1, 15, 
+add: 1, pen, 2, 20, 
+add: 2, pencil, 3, 30, 
+view_goods 
+view_goods 
+add: 2, pillows, 2, 3, 
+add: 1, p, 1, 1, 
+add: 3, e, 1, 2, 
+add: 1, w, 1, 1, 
+add: 1, ww, 1, 1, 
+total_price 
+view_goods 
+delete: p, 1, 
+view_goods 
+delete: p, 1, 
+view_goods 
+add: 1, o, 1, 2, 
+delete: o, 1, 
+view_goods 
+add: 2, r, 1, 1, 
+delete: r, 1, 
+view_goods 
+add: 1, pen, 2, 15, 
+add: 2, pencil, 2, 30, 
+add: 3, o, 1, 1, 
+view_goods 
+view_goods 
+delete: o, 1, 
+view_goods 
+total_price 
+view_goods 
+add: 1, pen, 2, 40, 
+view_goods 
