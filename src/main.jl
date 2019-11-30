@@ -17,7 +17,7 @@ actions["add"] = add_product
 actions["delete"] = delete_product
 actions["total_price"] = sum_price
 actions["view_goods"] = view_goods
-actions["calc_sum"] = calc_sum
+actions["calc_cons"] = calc_consumption
 
 logger = SimpleLogger(open("working_process.txt", "w+"))
 
@@ -29,15 +29,17 @@ with_logger(logger) do
     inventory = readline()
     db = SQLite.DB(inventory)
     SQLite.execute!(db, "CREATE TABLE IF NOT EXISTS Goods(Name TEXT, Amount INT64, Price_per_Product REAL, Price_for_All REAL);")
-
     while true #выполнение операций со складом
         println("Введите опцию")
         cmd = readline()
         cmd = lowercase(cmd)
+        @info "Command '$cmd' called"
         if cmd == "exit"
             break
+        end
+        if(cmd=="view_goods")
+                actions[cmd](db,inventory)
         else
-            @info "Command '$cmd' called"
             actions[cmd](db)
         end
     end

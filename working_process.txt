@@ -3,56 +3,14 @@
 ┌ Info: user_instruction already called
 └ @ Main C:\Users\Анастасия\IdeaProjects\ppl-inventory-Anaiya798\src\main.jl:27
 ┌ Info: Command 'view_goods' called
-└ @ Main C:\Users\Анастасия\IdeaProjects\ppl-inventory-Anaiya798\src\main.jl:40
+└ @ Main C:\Users\Анастасия\IdeaProjects\ppl-inventory-Anaiya798\src\main.jl:36
 ┌ Info: view_goods called
-└ @ Main.available_functions C:\Users\Анастасия\IdeaProjects\ppl-inventory-Anaiya798\src\available_functions.jl:92
+└ @ Main.available_functions C:\Users\Анастасия\IdeaProjects\ppl-inventory-Anaiya798\src\available_functions.jl:147
 ┌ Info: make_history called
-└ @ Main.available_functions C:\Users\Анастасия\IdeaProjects\ppl-inventory-Anaiya798\src\available_functions.jl:78
-┌ Info: goods table showed
-└ @ Main.available_functions C:\Users\Анастасия\IdeaProjects\ppl-inventory-Anaiya798\src\available_functions.jl:96
-┌ Info: Command 'add' called
-└ @ Main C:\Users\Анастасия\IdeaProjects\ppl-inventory-Anaiya798\src\main.jl:40
-┌ Info: add_product called
-└ @ Main.available_functions C:\Users\Анастасия\IdeaProjects\ppl-inventory-Anaiya798\src\available_functions.jl:20
-┌ Info: product id is
-│   id = 1
-└ @ Main.available_functions C:\Users\Анастасия\IdeaProjects\ppl-inventory-Anaiya798\src\available_functions.jl:23
-┌ Info: product name is
-│   name = pen
-└ @ Main.available_functions C:\Users\Анастасия\IdeaProjects\ppl-inventory-Anaiya798\src\available_functions.jl:26
-┌ Info: product amount is
-│   amount = 2
-└ @ Main.available_functions C:\Users\Анастасия\IdeaProjects\ppl-inventory-Anaiya798\src\available_functions.jl:29
-┌ Info: price per product
-│   price = 40
-└ @ Main.available_functions C:\Users\Анастасия\IdeaProjects\ppl-inventory-Anaiya798\src\available_functions.jl:32
-┌ Info: pen
-│   inserted into table = inserted into table
-└ @ Main.available_functions C:\Users\Анастасия\IdeaProjects\ppl-inventory-Anaiya798\src\available_functions.jl:42
-┌ Info: make_history called
-└ @ Main.available_functions C:\Users\Анастасия\IdeaProjects\ppl-inventory-Anaiya798\src\available_functions.jl:78
-┌ Info: 1
-│   was written = was written
-└ @ Main.available_functions C:\Users\Анастасия\IdeaProjects\ppl-inventory-Anaiya798\src\available_functions.jl:84
-┌ Info: pen
-│   was written = was written
-└ @ Main.available_functions C:\Users\Анастасия\IdeaProjects\ppl-inventory-Anaiya798\src\available_functions.jl:84
-┌ Info: 2
-│   was written = was written
-└ @ Main.available_functions C:\Users\Анастасия\IdeaProjects\ppl-inventory-Anaiya798\src\available_functions.jl:84
-┌ Info: 40
-│   was written = was written
-└ @ Main.available_functions C:\Users\Анастасия\IdeaProjects\ppl-inventory-Anaiya798\src\available_functions.jl:84
-┌ Info: pen
-│   added = added
-└ @ Main.available_functions C:\Users\Анастасия\IdeaProjects\ppl-inventory-Anaiya798\src\available_functions.jl:45
-┌ Info: Command 'view_goods' called
-└ @ Main C:\Users\Анастасия\IdeaProjects\ppl-inventory-Anaiya798\src\main.jl:40
-┌ Info: view_goods called
-└ @ Main.available_functions C:\Users\Анастасия\IdeaProjects\ppl-inventory-Anaiya798\src\available_functions.jl:92
-┌ Info: make_history called
-└ @ Main.available_functions C:\Users\Анастасия\IdeaProjects\ppl-inventory-Anaiya798\src\available_functions.jl:78
-┌ Info: goods table showed
-└ @ Main.available_functions C:\Users\Анастасия\IdeaProjects\ppl-inventory-Anaiya798\src\available_functions.jl:96
+└ @ Main.available_functions C:\Users\Анастасия\IdeaProjects\ppl-inventory-Anaiya798\src\available_functions.jl:133
+┌ Info: report.txt closed
+└ @ Main.available_functions C:\Users\Анастасия\IdeaProjects\ppl-inventory-Anaiya798\src\available_functions.jl:153
+┌ Info: Command 'exit' called
+└ @ Main C:\Users\Анастасия\IdeaProjects\ppl-inventory-Anaiya798\src\main.jl:36
 ┌ Info: End of the program
-└ @ Main C:\Users\Анастасия\IdeaProjects\ppl-inventory-Anaiya798\src\main.jl:44
+└ @ Main C:\Users\Анастасия\IdeaProjects\ppl-inventory-Anaiya798\src\main.jl:46

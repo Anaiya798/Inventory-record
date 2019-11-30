@@ -15,12 +15,41 @@ module available_functions
     using DataFrames
 using SQLite
 
-export add_product, delete_product, sum_price,  view_goods, calc_sum, calc_price_products
+export add_product, delete_product, sum_price,  view_goods, calc_consumption
+
+    function correct_name(db, name)
+        @info "correct_name called"
+        k = SQLite.Query(db, "SELECT * FROM Goods;") |> DataFrame
+        search_in_table = findfirst(x -> x==name, k.Name)
+        if (search_in_table == nothing)
+            println("Такого товара на склад еще не поступало")
+            return -1
+        else return 0
+            end
+    end
+
+    function correct_amount(db, name, amount)
+        @info "correct_amount called"
+         k = SQLite.Query(db, "SELECT Amount  FROM Goods WHERE Name = '$name';") |> DataFrame
+         if(k.Amount<Union{Missing, Int64}[amount])
+             println("Товара в указанном количестве нет в наличии ")
+             return -1
+         else return 0
+         end
+    end
+
+    function correct_price(db, name, price)
+        @info "correct_price called"
+         k = SQLite.Query(db, "SELECT Price_per_Product  FROM Goods WHERE Name = '$name';") |> DataFrame
+         if(k.Price_per_Product!=Union{Missing, Float64}[price])
+             println("Данный товар недоступен по указанной цене")
+             return -1
+         else return 0
+         end
+    end
+
     function add_product(db) #добавление товара на склад
         @info "add_product called"
-        print("Индекс товара: ")
-        id = parse(Int64, readline())
-        @info "product id is" id
         print("Наименование: ")
         name=(readline())
         @info "product name is" name
@@ -29,10 +58,19 @@ export add_product, delete_product, sum_price,  view_goods, calc_sum, calc_price
         @info "product amount is" amount
         print("Цена за штуку: ")
         price = parse(Int64, readline())
-        @info "price per product" price
+        @info "price per product is" price
+        do_add(db, name, amount, price)
+    end
+
+    function do_add(db, name, amount, price)
+        @info "do_add called"
         k = SQLite.Query(db, "SELECT * FROM Goods;") |> DataFrame
         search_in_table = findfirst(x -> x==name, k.Name)
         if search_in_table!= nothing #если товар на складе уже есть, обновляем данные таблицы
+            check = correct_price(db, name, price)
+            if(check==-1)
+                return
+            end
             query = "UPDATE Goods SET Amount = Amount + $amount, Price_for_all = Price_for_all + ($price*$amount) WHERE Name = '$name';"
             SQLite.Query(db, query)
             @info "table updated"
@@ -41,8 +79,10 @@ export add_product, delete_product, sum_price,  view_goods, calc_sum, calc_price
             SQLite.Query(db, query)
             @info name "inserted into table"
          end
-        make_history("add:", [id, name, amount, price])#добавление действия в историю операций
+        make_history("add:", [name, amount, price])#добавление действия в историю операций
         @info name "added"
+        curr_table = SQLite.Query(db, "SELECT * FROM Goods;")|> DataFrame
+        return curr_table
     end
 
     function delete_product(db) #удаление товара со склада
@@ -53,11 +93,26 @@ export add_product, delete_product, sum_price,  view_goods, calc_sum, calc_price
         amount = parse(Int64, readline())
         print("Цена за штуку: ")
         price = parse(Int64, readline())
-        query = "UPDATE Goods SET Amount = Amount - $amount, Price_for_All = Price_for_All - ($price*$amount) WHERE Name = '$name';"
-        SQLite.Query(db,query)
-        @info "table updated"
-        make_history("delete:", [name, amount])#добавление операции в историю
-        @info name amount price "was deleted"
+        do_delete(db, name, amount,price)
+    end
+
+    function do_delete(db, name, amount, price)
+        @info "do_delete called"
+        check1 = correct_name(db, name)
+        if(check1==-1)
+            return
+        end
+        check2 = correct_amount(db, name, amount)
+        check3 = correct_price(db, name, price)
+        if(check2==0 && check3==0)
+            query = "UPDATE Goods SET Amount = Amount - $amount, Price_for_All = Price_for_All - ($price*$amount) WHERE Name = '$name';"
+            SQLite.Query(db,query)
+            @info "table updated"
+            make_history("delete:", [name, amount])#добавление операции в историю
+            @info name amount price "was deleted"
+        end
+         curr_table = SQLite.Query(db, "SELECT * FROM Goods;")|> DataFrame
+        return curr_table
     end
 
     function sum_price(db)
@@ -88,17 +143,19 @@ export add_product, delete_product, sum_price,  view_goods, calc_sum, calc_price
         @debug "history.txt closed"
     end
 
-    function view_goods(db)#вывод общей таблицы товаров на складе
+    function view_goods(db, inventory)#вывод общей таблицы товаров на складе
         @info "view_goods called"
         k = SQLite.Query(db, "SELECT * FROM Goods;") |> DataFrame
-        println(k)
+        file = open("report.txt", "a")
+        write(file, "\nТекущее состояние склада $inventory: $k")
         make_history("view_goods", [])
-        @info "goods table showed"
+        close(file)
+        @info "report.txt closed"
         return k
     end
 
-    function calc_price_products(db, name, amount)#подсчет суммы одноименных единиц, требуемых к расходу
-        @info "calc_price_products called"
+    function price_same_products(db, name, amount)#подсчет суммы одноименных единиц, требуемых к расходу
+        @info "price_same_products "
         k = SQLite.Query(db, "SELECT Price_per_Product  FROM Goods WHERE Name = '$name';") |> DataFrame
         sum = 0;
         for i in k.Price_per_Product
@@ -108,8 +165,10 @@ export add_product, delete_product, sum_price,  view_goods, calc_sum, calc_price
         return(sum)
     end
 
-    function calc_sum(db) #подсчет общей суммы требуемых к расходу товаров
-        @info "calc_sum called"
+    function calc_consumption(db) #подсчет общей суммы требуемых к расходу товаров
+        @info "calc_consumption called"
+        file = open("report.txt", "a")
+        @debug "report.txt opened"
         ans = 0
         while true
             println("Наименование: ")
@@ -120,12 +179,14 @@ export add_product, delete_product, sum_price,  view_goods, calc_sum, calc_price
             println("Количество единиц товара: ")
             amount = parse(Int64, readline())
             @info name "," amount "required for consumption"
-            ans = ans+calc_price_products(db, name, amount)
-
+            ans = ans+price_same_products(db, name, amount)
         end
         end
-        println(ans)
+         write(file, "\nОбщая суммы требуемых к расходу товаров: $ans")
         @info "Consumption sum is" ans
+        close(file)
+        @debug "report.txt closed"
+
    end
 
 end

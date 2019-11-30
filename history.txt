@@ -41,3 +41,69 @@ total_price
 view_goods 
 add: 1, pen, 2, 40, 
 view_goods 
+view_goods 
+view_goods 
+view_goods 
+delete: pen, 1, 
+delete: pen, 1, 
+view_goods 
+delete: pencil, 2, 
+delete: pen, 1, 
+delete: pen, 1, 
+view_goods 
+add: 1, pen, 4, 15, 
+view_goods 
+delete: pen, 1, 
+delete: pen, 1, 
+view_goods 
+delete: pen, 1, 
+delete: pencil, 1, 
+delete: pencil, 1, 
+view_goods 
+delete: o, 1, 
+view_goods 
+delete: o, 1, 
+view_goods 
+delete: pen, 1, 
+delete: pen, 1, 
+view_goods 
+add: 1, r, 1, 10, 
+delete: r, 1, 
+add: 2, pillow, 2, 45, 
+delete: pillow, 1, 
+delete: pillow, 1, 
+add: wow, 1, 1, 
+view_goods 
+add: wew, 1, 1, 
+add: pen, 1, 20, 
+add: pen, 1, 30, 
+view_goods 
+add: pen, 1, 15, 
+delete: pen, 1, 
+add: pen, 1, 15, 
+add: pen, 2, 15, 
+delete: pen, 1, 
+view_goods 
+add: pillow, 3, 38, 
+add: pillow, 1, 38, 
+view_goods 
+add: wi, 1, 1, 
+add: pen, 3, 15, 
+add: fi, 1, 1, 
+add: fi, 1, 2, 
+add: pen, 1, 1, 
+add: pen, 4, 15, 
+delete: pen, 2, 
+delete: pen, 3, 
+add: s, 2, 1, 
+delete: s, 1, 
+add: pen, 1, 1, 
+delete: pen, 1, 
+add: pen, 3, 15, 
+delete: pen, 1, 
+add: pen, 4, 2, 
+add: pen, 2, 15, 
+add: pen, 1, 15, 
+add: pen, 3, 15, 
+add: pen, 2, 15, 
+view_goods 
